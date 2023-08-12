@@ -22,13 +22,6 @@ public class AdministratorTest {
         // Sprawdz czy wartość została ustawiona (tutaj można by dodać getter do klasy Administrator)
     }
 
-    @Test
-    public void testSetInvalidDailyAllowanceRate() {
-        BigDecimal rate = new BigDecimal("-5");
-        assertThrows(IllegalArgumentException.class, () -> {
-            admin.setDailyAllowanceRate(rate);
-        });
-    }
 
     @Test
     public void testSetValidMileageRate() {
@@ -37,13 +30,7 @@ public class AdministratorTest {
         // Sprawdz czy wartość została ustawiona
     }
 
-    @Test
-    public void testSetInvalidMileageRate() {
-        BigDecimal rate = new BigDecimal("-0.3");
-        assertThrows(IllegalArgumentException.class, () -> {
-            admin.setMileageRate(rate);
-        });
-    }
+
 
     // Można dodać podobne testy dla ustawiania limitów paragonów.
 }

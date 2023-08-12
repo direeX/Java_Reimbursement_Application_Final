@@ -60,3 +60,21 @@ function submitApplication() {
     // Na razie dodaję alert dla symulacji.
     alert("Application has been submitted!");
 }
+
+document.getElementById('userButton').addEventListener('click', function() {
+    fetch('/user')
+        .then(response => response.text())
+        .then(data => {
+            // Wyświetl odpowiedź lub zaktualizuj interfejs użytkownika
+            console.log(data);
+        });
+});
+
+document.getElementById('adminButton').addEventListener('click', function() {
+    fetch('/admin')
+        .then(response => response.text())
+        .then(data => {
+            // Wyświetl odpowiedź lub zaktualizuj interfejs użytkownika
+            console.log(data);
+        });
+});
