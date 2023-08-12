@@ -3,11 +3,12 @@ package org.example;
 
 
 import com.sun.net.httpserver.HttpServer;
+import org.example.handlers.MyHandler;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-public class App {
+public class MainApp {
 
     public static void main(String[] args) {
         try {

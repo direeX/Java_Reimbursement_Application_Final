@@ -5,34 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
-    <title>Wniosek o zwrot kosztów</title>
+    <title>Expense Reimbursement Application</title>
 </head>
 
 <body>
 <div class="main-container">
-    <h2>Wniosek o zwrot kosztów</h2>
+    <h2>Expense Reimbursement Application</h2>
 
-    <label for="travelDate">Data podróży:</label>
+    <label for="travelDate">Travel Date:</label>
     <input type="date" id="travelDate">
 
-    <h3>Dodaj paragony:</h3>
+    <h3>Add Receipts:</h3>
     <select id="receiptType">
-        <option value="taxi">Taksówka</option>
+        <option value="taxi">Taxi</option>
         <option value="hotel">Hotel</option>
-        <option value="flight">Bilet lotniczy</option>
-        <option value="train">Bilet kolejowy</option>
+        <option value="flight">Flight ticket</option>
+        <option value="train">Train ticket</option>
     </select>
-    <input type="number" placeholder="Wartość paragonu" id="receiptValue">
-    <button onclick="addReceipt()">Dodaj paragon</button>
+    <input type="number" placeholder="Receipt value" id="receiptValue">
+    <button onclick="addReceipt()">Add a pattern</button>
 
-    <h3>Lista dodanych paragonów:</h3>
+    <h3>List of Added Receipts:</h3>
     <ul id="receiptList">
     </ul>
+    </ul>
 
-    <label for="dailyAllowance">Dzienna należność:</label>
-    <input type="number" id="dailyAllowance" placeholder="Wprowadź wartość">
+    <label for="dailyAllowance">Daily Allowance:</label>
+    <input type="number" id="dailyAllowance" placeholder="Enter a value">
 
-    <button onclick="submitApplication()">Wyślij wniosek</button>
+    <button onclick="submitApplication()">Submit Application</button>
 
     <button id="backToHomeBtn" onclick="backToHome()">Back to home page</button>
 </div>

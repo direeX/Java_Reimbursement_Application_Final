@@ -1,4 +1,4 @@
-package org.example;
+package org.example.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -34,7 +34,7 @@ public class MyHandler implements HttpHandler {
     private byte[] loadResource(String resourceName) throws IOException {
         InputStream is = getClass().getClassLoader().getResourceAsStream(resourceName);
         if (is == null) {
-            throw new FileNotFoundException("Plik " + resourceName + " nie został znaleziony.");
+            throw new FileNotFoundException("File " + resourceName + " was not found.");
         }
         return is.readAllBytes();
     }

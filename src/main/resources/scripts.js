@@ -36,7 +36,7 @@ function addReceipt() {
 
     const list = document.getElementById("receiptList");
     const item = document.createElement("li");
-    item.textContent = `${receiptType}: ${receiptValue} zł`;
+    item.textContent = `${receiptType}: ${receiptValue} $`;
     list.appendChild(item);
 }
 
@@ -45,18 +45,18 @@ function addReceipt() {
     const receiptValue = document.getElementById('receiptValue').value;
 
     if (!receiptValue) {
-        alert('Proszę podać wartość paragonu.');
+        alert('Please provide a receipt value.');
         return;
     }
 
     const receiptList = document.getElementById('receiptList');
     const listItem = document.createElement('li');
-    listItem.textContent = `${receiptType}: ${receiptValue} zł`;
+    listItem.textContent = `${receiptType}: ${receiptValue} $`;
     receiptList.appendChild(listItem);
 }
 
 function submitApplication() {
     // Tutaj będziemy przetwarzać wniosek i wysyłać go do serwera.
     // Na razie dodaję alert dla symulacji.
-    alert("Wniosek został wysłany!");
+    alert("Application has been submitted!");
 }
