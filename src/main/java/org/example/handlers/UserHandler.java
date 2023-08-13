@@ -24,7 +24,7 @@ public class UserHandler implements HttpHandler {
     }
 
     private void serveHtml(HttpExchange httpExchange) throws IOException {
-        try (InputStream is = this.getClass().getResourceAsStream("/user.html")) {
+        try (InputStream is = this.getClass().getResourceAsStream("/static/user.html")) {
             if (is == null) {
                 httpExchange.sendResponseHeaders(404, 0); // Nie znaleziono pliku
                 httpExchange.close();

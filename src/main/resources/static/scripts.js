@@ -1,9 +1,9 @@
 function goToUser() {
-    window.location.href = "/user.html";
+    window.location.href = "/static/user.html";
 }
 
 function goToAdmin() {
-    window.location.href = "/login.html";
+    window.location.href = "/static/login.html";
 }
 
 function changeBackground() {
@@ -19,7 +19,7 @@ function checkLogin() {
     const password = document.getElementById("password").value;
 
     if(username === "admin" && password === "admin") {
-        window.location.href = "/admin.html";
+        window.location.href = "/static/admin.html";
     }
 }
 

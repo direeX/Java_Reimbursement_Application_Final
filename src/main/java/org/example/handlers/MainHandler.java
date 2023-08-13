@@ -14,18 +14,25 @@ public class MainHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         byte[] response;
+        String contentType = "text/html";  // domyślny typ treści
+
         if ("/".equals(path)) {
-            response = loadResource("index.html");
+            response = loadResource("static/index.html");
             exchange.sendResponseHeaders(200, response.length);
         } else {
             try {
+                if (path.endsWith(".css")) {
+                    contentType = "text/css";
+                }
                 response = loadResource(path.substring(1));
+                exchange.getResponseHeaders().set("Content-Type", contentType);
                 exchange.sendResponseHeaders(200, response.length);
             } catch (FileNotFoundException e) {
                 response = "404 Not Found".getBytes();
                 exchange.sendResponseHeaders(404, response.length);
             }
         }
+
         OutputStream os = exchange.getResponseBody();
         os.write(response);
         os.close();
