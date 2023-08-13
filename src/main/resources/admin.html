@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
   <title>Admin Panel</title>
 </head>
 <body>
+<div class="main-container">
 <h1>Submitted Claims</h1>
 <div id="claimsList">
-
 <table id="claims-table">
   <thead>
   <tr>
@@ -25,8 +26,9 @@
   <!-- Tutaj będą dodawane wnioski -->
   </tbody>
 </table>
-
-
+</div>
+  <button id="backToHomeBtn" onclick="backToHome()">Back to home page</button>
+</div>
 <script src="admin-scripts.js"></script>
 </body>
 </html>
