@@ -3,6 +3,7 @@ package org.example.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.example.MainApp;
+import org.example.repositories.ReceiptRepository;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -10,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SubmitHandler implements HttpHandler {
+    private ReceiptRepository repository = new ReceiptRepository(); // lub inny sposób uzyskania dostępu do repozytorium
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
@@ -19,6 +21,7 @@ public class SubmitHandler implements HttpHandler {
 
             // Oto twoje dane formularza, teraz możesz je przetworzyć
             System.out.println(formData);
+            repository.addReceipt(formData); // Dodaj dane formularza do repozytorium
 
             Map<String, String> parameters = parseFormData(formData);
 

@@ -2,23 +2,33 @@ package org.example.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.example.models.Receipt;
-import org.example.repositories.ReceiptRepository;
-import org.example.utils.ResponseUtils;
-
+import org.example.MainApp;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
 
 public class AdminHandler implements HttpHandler {
+    @Override
+    public void handle(HttpExchange httpExchange) throws IOException {
+        String method = httpExchange.getRequestMethod();
 
-        @Override
-        public void handle(HttpExchange httpExchange) throws IOException {
-            // Używaj getResourceAsStream do wczytania zasobu z katalogu resources
+        if ("GET".equalsIgnoreCase(method)) {
+            StringBuilder response = new StringBuilder();
+
+            response.append("<h1>Submitted Claims</h1>");
+
+            for (String claim : MainApp.claimsList) {
+                response.append("<p>").append(claim).append("</p>");
+            }
+
+            byte[] responseBytes = response.toString().getBytes();
+
+            httpExchange.sendResponseHeaders(200, responseBytes.length);
+            OutputStream os = httpExchange.getResponseBody();
+            os.write(responseBytes);
+            os.close();
+        } else {
+            // Obsługa głównego widoku panelu administracyjnego
             try (InputStream is = this.getClass().getResourceAsStream("/admin.html")) {
                 if (is == null) {
                     httpExchange.sendResponseHeaders(404, 0); // Nie znaleziono pliku
@@ -35,3 +45,4 @@ public class AdminHandler implements HttpHandler {
             }
         }
     }
+}

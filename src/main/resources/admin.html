@@ -1,14 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ... twoje metatagi ... -->
-  <title>Panel administracyjny</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
 </head>
 <body>
-<h1>Panel administracyjny</h1>
-<div id="claims-list">
-  <!-- Lista wniosków zostanie tu wygenerowana -->
-</div>
+<h1>Submitted Claims</h1>
+<div id="claimsList">
+
+<table id="claims-table">
+  <thead>
+  <tr>
+    <th>Data podróży</th>
+    <th>Typ paragonu</th>
+    <th>Ilość dni</th>
+    <th>Dystans (km)</th>
+    <th>Operacje</th>
+  </tr>
+  </thead>
+  <tbody id="claims-list">
+  <!-- Tutaj będą dodawane wnioski -->
+  </tbody>
+</table>
+
+
 <script src="admin-scripts.js"></script>
 </body>
 </html>

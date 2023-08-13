@@ -8,14 +8,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class ReceiptRepository {
+    private List<String> receipts = new ArrayList<>();
 
-    private static final List<Receipt> receiptsList = new ArrayList<>();
-
-    public static void addReceipt(Receipt receipt) {
-        receiptsList.add(receipt);
+    public void addReceipt(String formData) {
+        receipts.add(formData);
     }
 
-    public static List<Receipt> getAllReceipts() {
-        return Collections.unmodifiableList(receiptsList);
+    public List<String> getAllReceipts() {
+        return receipts;
     }
 }
