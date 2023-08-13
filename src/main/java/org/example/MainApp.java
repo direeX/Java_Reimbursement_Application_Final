@@ -7,6 +7,7 @@ import org.example.handlers.AdminHandler;
 import org.example.handlers.MainHandler;
 import org.example.handlers.SubmitHandler;
 import org.example.handlers.UserHandler;
+import org.example.repositories.Claim;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainApp {
-    public static List<String> claimsList = new ArrayList<>();
+    public static List<Claim> claimsList = new ArrayList<>();
     public static double dailyAllowanceRate = 15.0; // domyślna stawka za dzień
     public static double mileageRate = 0.3; // domyślna stawka za km
 

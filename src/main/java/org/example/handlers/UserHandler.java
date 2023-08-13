@@ -6,9 +6,6 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,6 +41,7 @@ public class UserHandler implements HttpHandler {
     }
 
     private void processFormData(HttpExchange httpExchange) throws IOException {
+        System.out.println("Processing form data...");
         InputStreamReader isr = new InputStreamReader(httpExchange.getRequestBody(), "utf-8");
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
@@ -52,6 +50,7 @@ public class UserHandler implements HttpHandler {
         Map<String, String> params = parseFormData(formData);
         System.out.println(formData); // test
         double days = Double.parseDouble(params.getOrDefault("days", "0"));
+        System.out.println("Days received: " + days);
         double distance = Double.parseDouble(params.getOrDefault("distance", "0"));
 
         // ... obliczenia oparte na globalnych stawkach ...

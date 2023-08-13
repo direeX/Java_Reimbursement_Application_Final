@@ -25,41 +25,47 @@ function checkLogin() {
 
 document.addEventListener('DOMContentLoaded', function() {
     const reimbursementForm = document.getElementById('reimbursementForm');
-    const totalAmountSpan = document.getElementById('total-amount');
+    if (reimbursementForm) {
 
-    reimbursementForm.addEventListener('submit', function(event) {
-        event.preventDefault();
+        const totalAmountSpan = document.getElementById('total-amount');
+        reimbursementForm.addEventListener('submit', function (event) {
+            event.preventDefault();
 
-        const tripDate = document.getElementById('trip-date').value;
-        const receiptType = document.getElementById('receipts-dropdown').value;
-        const days = document.getElementById('days').value;
-        const disableDays = document.getElementById('disable-days').checked;
-        const distance = document.getElementById('distance').value;
+            const tripDate = document.getElementById('trip-date').value;
+            const receiptType = document.getElementById('receipts-dropdown').value;
+            const days = document.getElementById('days').value;
+            const disableDays = document.getElementById('disable-days').checked;
+            const distance = document.getElementById('distance').value;
 
-        const formData = new URLSearchParams();
-        formData.append('trip-date', tripDate);
-        formData.append('receipt-type', receiptType);
-        formData.append('days', days);
-        formData.append('disable-days', disableDays);
-        formData.append('distance', distance);
+            const formData = new URLSearchParams();
+            formData.append('trip-date', tripDate);
+            formData.append('receipt-type', receiptType);
+            formData.append('days', days);
+            formData.append('disable-days', disableDays);
+            formData.append('distance', distance);
 
-        fetch('/submit', { // Zmieniłem '/user' na '/submit', ponieważ w twoim HTML endpoint to '/submit'
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-            },
-            body: formData.toString()
-        })
-            .then(response => {
-                console.log(response); // Zobacz całą odpowiedź
-                return response.text();
+            console.log("Sending data:", formData.toString()); // TODO
+
+
+
+            fetch('/submit', { // Zmieniłem '/user' na '/submit', ponieważ w twoim HTML endpoint to '/submit'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+                },
+                body: formData.toString()
             })
-            .then(text => {
-                // Wyświetl odpowiedź serwera (czyli obliczony zwrot kosztów) na stronie
-                totalAmountSpan.textContent = text.split(": ")[1];
-            })
-            .catch(error => {
-                console.error('There was an error sending the form data:', error);
-            });
-    });
+                .then(response => {
+                    console.log(response); // Zobacz całą odpowiedź
+                    return response.text();
+                })
+                .then(text => {
+                    // Wyświetl odpowiedź serwera (czyli obliczony zwrot kosztów) na stronie
+                    totalAmountSpan.textContent = text.split(": ")[1];
+                })
+                .catch(error => {
+                    console.error('There was an error sending the form data:', error);
+                });
+        });
+    }
 });

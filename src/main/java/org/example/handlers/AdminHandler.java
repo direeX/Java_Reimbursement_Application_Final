@@ -3,6 +3,8 @@ package org.example.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.example.MainApp;
+import org.example.repositories.Claim;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,7 +19,7 @@ public class AdminHandler implements HttpHandler {
 
             response.append("<h1>Submitted Claims</h1>");
 
-            for (String claim : MainApp.claimsList) {
+            for (Claim claim : MainApp.claimsList) {
                 response.append("<p>").append(claim).append("</p>");
             }
 
