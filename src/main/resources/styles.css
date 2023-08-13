@@ -83,3 +83,12 @@ input, select {
     margin-bottom: 10px;
 }
 
+#receipts-container {
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+.receipt {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}

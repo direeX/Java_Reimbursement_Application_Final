@@ -10,33 +10,34 @@
 
 <body>
 <div class="main-container">
-    <h2>Expense Reimbursement Application</h2>
+    <h1 class="title">Reimbursement App</h1>
 
-    <label for="travelDate">Travel Date:</label>
-    <input type="date" id="travelDate">
-
-    <h3>Add Receipts:</h3>
-    <select id="receiptType">
-        <option value="taxi">Taxi</option>
-        <option value="hotel">Hotel</option>
-        <option value="flight">Flight ticket</option>
-        <option value="train">Train ticket</option>
-    </select>
-    <input type="number" placeholder="Receipt value" id="receiptValue">
-    <button onclick="addReceipt()">Add a pattern</button>
-
-    <h3>List of Added Receipts:</h3>
-    <ul id="receiptList">
-    </ul>
-    </ul>
-
-    <label for="dailyAllowance">Daily Allowance:</label>
-    <input type="number" id="dailyAllowance" placeholder="Enter a value">
-
-    <button onclick="submitApplication()">Submit Application</button>
-
+    <div id="end-user-view" class="view">
+        <form id="reimbursementForm">
+            <label>Trip Date: <input type="date" name="trip-date" id="trip-date"></label> <br>
+            <label>
+                Add Receipt:
+                <select name="receipt-type" id="receipts-dropdown">
+                    <option value="taxi">Taxi</option>
+                    <option value="hotel">Hotel</option>
+                    <option value="plane">Plane Ticket</option>
+                    <option value="train">Train</option>
+                </select>
+            </label>
+            <div>
+                <label>Daily Allowance Days: <input type="number" name="days" id="days"></label>
+                <label>Disable on specific days: <input type="checkbox" name="disable-days" id="disable-days"></label>
+            </div>
+            <label>Distance Driven (km): <input type="number" name="distance" id="distance"></label>
+            <input type="submit" id="new-claim" value="Create a new reimbursement claim">
+        </form>
+        <h3>Total Reimbursement Amount: <span id="total-amount">0</span>$</h3>
+    </div>
     <button id="backToHomeBtn" onclick="backToHome()">Back to home page</button>
 </div>
+<footer>
+    This is the footer content.
+</footer>
 <script src="scripts.js"></script>
 </body>
 </html>

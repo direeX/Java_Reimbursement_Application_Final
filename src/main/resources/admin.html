@@ -1,26 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="styles.css">
-  <title>Admin Page</title>
+  <!-- ... twoje metatagi ... -->
+  <title>Panel administracyjny</title>
 </head>
 <body>
-<div class="main-container">
-<div id="loginForm">
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="checkLogin()">Login</button>
+<h1>Panel administracyjny</h1>
+<div id="claims-list">
+  <!-- Lista wniosków zostanie tu wygenerowana -->
 </div>
-
-<button id="adminBtn" onclick="changeBackground()" style="display: none;">Change Background</button>
-  <button id="backToHomeBtn" onclick="backToHome()">Back to home page</button>
-</div>
-<footer>
-  This is the footer content.
-</footer>
-
-<script src="scripts.js"></script>
+<script src="admin-scripts.js"></script>
 </body>
 </html>

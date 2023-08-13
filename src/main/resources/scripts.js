@@ -1,11 +1,9 @@
-
 function goToUser() {
     window.location.href = "/user.html";
-    console.log("asd")
 }
 
 function goToAdmin() {
-    window.location.href = "/admin.html";
+    window.location.href = "/login.html";
 }
 
 function changeBackground() {
@@ -20,61 +18,48 @@ function checkLogin() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    // Dummy check for this example
     if(username === "admin" && password === "admin") {
-        document.getElementById("loginForm").style.display = "none";
-        document.getElementById("adminBtn").style.display = "block";
+        window.location.href = "/admin.html";
     }
 }
 
-let receipts = [];
+document.addEventListener('DOMContentLoaded', function() {
+    const reimbursementForm = document.getElementById('reimbursementForm');
+    const totalAmountSpan = document.getElementById('total-amount');
 
-function addReceipt() {
-    const receiptType = document.getElementById("receiptType").value;
-    const receiptValue = document.getElementById("receiptValue").value;
-    receipts.push({ type: receiptType, value: parseFloat(receiptValue) });
+    reimbursementForm.addEventListener('submit', function(event) {
+        event.preventDefault();
 
-    const list = document.getElementById("receiptList");
-    const item = document.createElement("li");
-    item.textContent = `${receiptType}: ${receiptValue} $`;
-    list.appendChild(item);
-}
+        const tripDate = document.getElementById('trip-date').value;
+        const receiptType = document.getElementById('receipts-dropdown').value;
+        const days = document.getElementById('days').value;
+        const disableDays = document.getElementById('disable-days').checked;
+        const distance = document.getElementById('distance').value;
 
-function addReceipt() {
-    const receiptType = document.getElementById('receiptType').value;
-    const receiptValue = document.getElementById('receiptValue').value;
+        const formData = new URLSearchParams();
+        formData.append('trip-date', tripDate);
+        formData.append('receipt-type', receiptType);
+        formData.append('days', days);
+        formData.append('disable-days', disableDays);
+        formData.append('distance', distance);
 
-    if (!receiptValue) {
-        alert('Please provide a receipt value.');
-        return;
-    }
-
-    const receiptList = document.getElementById('receiptList');
-    const listItem = document.createElement('li');
-    listItem.textContent = `${receiptType}: ${receiptValue} $`;
-    receiptList.appendChild(listItem);
-}
-
-function submitApplication() {
-    // Tutaj będziemy przetwarzać wniosek i wysyłać go do serwera.
-    // Na razie dodaję alert dla symulacji.
-    alert("Application has been submitted!");
-}
-
-document.getElementById('userButton').addEventListener('click', function() {
-    fetch('/user')
-        .then(response => response.text())
-        .then(data => {
-            // Wyświetl odpowiedź lub zaktualizuj interfejs użytkownika
-            console.log(data);
-        });
-});
-
-document.getElementById('adminButton').addEventListener('click', function() {
-    fetch('/admin')
-        .then(response => response.text())
-        .then(data => {
-            // Wyświetl odpowiedź lub zaktualizuj interfejs użytkownika
-            console.log(data);
-        });
+        fetch('/submit', { // Zmieniłem '/user' na '/submit', ponieważ w twoim HTML endpoint to '/submit'
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+            },
+            body: formData.toString()
+        })
+            .then(response => {
+                console.log(response); // Zobacz całą odpowiedź
+                return response.text();
+            })
+            .then(text => {
+                // Wyświetl odpowiedź serwera (czyli obliczony zwrot kosztów) na stronie
+                totalAmountSpan.textContent = text.split(": ")[1];
+            })
+            .catch(error => {
+                console.error('There was an error sending the form data:', error);
+            });
+    });
 });
