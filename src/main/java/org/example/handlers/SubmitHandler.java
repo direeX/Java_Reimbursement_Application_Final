@@ -2,7 +2,7 @@ package org.example.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import org.example.MainApp;
+import org.example.config.AppConfig;
 import org.example.repositories.Claim;
 import org.example.repositories.ReceiptRepository;
 
@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SubmitHandler implements HttpHandler {
-    private ReceiptRepository repository = new ReceiptRepository(); // lub inny sposób uzyskania dostępu do repozytorium
+    private ReceiptRepository repository = new ReceiptRepository();
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if ("POST".equals(exchange.getRequestMethod())) {
@@ -22,7 +23,7 @@ public class SubmitHandler implements HttpHandler {
 
             // Oto twoje dane formularza, teraz możesz je przetworzyć
             System.out.println(formData);
-            repository.addReceipt(formData); // Dodaj dane formularza do repozytorium
+            repository.addReceipt(formData);
 
             Map<String, String> parameters = parseFormData(formData);
 
@@ -33,23 +34,13 @@ public class SubmitHandler implements HttpHandler {
             claim.setDisableDays(Boolean.parseBoolean(parameters.get("disable-days")));
             claim.setDistance(Integer.parseInt(parameters.getOrDefault("distance", "0")));
 
-            MainApp.claimsList.add(claim);
-
-            String tripDate = parameters.get("trip-date");
-            String receiptType = parameters.get("receipts-dropdown");
-            int days = Integer.parseInt(parameters.getOrDefault("days", "0"));
-            boolean disableDays = parameters.containsKey("disable-days");
-            int distance = Integer.parseInt(parameters.getOrDefault("distance", "0"));
+            AppConfig.addClaim(claim);
 
             double reimbursementAmount = 0.0;
-
-                reimbursementAmount += days * org.example.MainApp.dailyAllowanceRate;
-
-            reimbursementAmount += distance * org.example.MainApp.mileageRate;
+            reimbursementAmount += claim.getDays() * AppConfig.getDailyAllowanceRate();
+            reimbursementAmount += claim.getDistance() * AppConfig.getMileageRate();
 
             String response = "Total Reimbursement Amount: " + reimbursementAmount + "$";
-
-
 
             exchange.sendResponseHeaders(200, response.getBytes().length);
             OutputStream os = exchange.getResponseBody();
@@ -57,6 +48,7 @@ public class SubmitHandler implements HttpHandler {
             os.close();
         }
     }
+
     private static Map<String, String> parseFormData(String formData) throws UnsupportedEncodingException {
         Map<String, String> parameters = new HashMap<>();
         if (formData != null && !formData.isEmpty()) {
@@ -69,6 +61,4 @@ public class SubmitHandler implements HttpHandler {
         }
         return parameters;
     }
-
-
 }

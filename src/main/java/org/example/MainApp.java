@@ -1,7 +1,5 @@
 package org.example;
 
-
-
 import com.sun.net.httpserver.HttpServer;
 import org.example.handlers.AdminHandler;
 import org.example.handlers.MainHandler;
@@ -15,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainApp {
-    public static List<Claim> claimsList = new ArrayList<>();
-    public static double dailyAllowanceRate = 15.0; // domyślna stawka za dzień
-    public static double mileageRate = 0.3; // domyślna stawka za km
+
+
+//    public static List<Claim> claimsList = new ArrayList<>();
+//    public static double dailyAllowanceRate = 15.0; // domyślna stawka za dzień
+//    public static double mileageRate = 0.3; // domyślna stawka za km
 
     public static void main(String[] args) {
         try {
@@ -33,6 +33,4 @@ public class MainApp {
             e.printStackTrace();
         }
     }
-
-
 }

@@ -2,15 +2,14 @@ function backToHome() {
     window.location.href = "/";
 }
 
-function submitEdit() {
-    // Tu zbieramy dane z edytowanego wniosku. Na razie zakładam, że masz tylko jeden wniosek na stronie.
-    // Jeśli masz ich więcej, trzeba będzie nieco zmodyfikować ten kod.
+function submitEdit(buttonElement) {
+    let detailsElement = buttonElement.closest('details');
 
-    let tripDate = document.querySelector("input[type='text'][name='tripDate']").value;
-    let receiptType = document.querySelector("input[type='text'][name='receiptType']").value;
-    let days = document.querySelector("input[type='text'][name='days']").value;
-    let isDisabled = document.querySelector("input[type='checkbox'][name='isDisabled']").checked;
-    let distance = document.querySelector("input[type='text'][name='distance']").value;
+    let tripDate = detailsElement.querySelector("input[name='tripDate']").value;
+    let receiptType = detailsElement.querySelector("input[name='receiptType']").value;
+    let days = detailsElement.querySelector("input[name='days']").value;
+    let isDisabled = detailsElement.querySelector("input[type='checkbox'][name='isDisabled']").checked;
+    let distance = detailsElement.querySelector("input[name='distance']").value;
 
     // Tworzymy obiekt z danymi
     let data = {
@@ -25,17 +24,20 @@ function submitEdit() {
     fetch("/admin/edit", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "text/plain"
         },
         body: JSON.stringify(data)
     })
-        .then(response => response.json())
+        .then(response => response.text())  // Zmiana tutaj
         .then(data => {
-            if (data.success) {
+            if (data === "success") {
                 alert("Zmiany zostały zapisane!");
             } else {
                 alert("Wystąpił błąd podczas zapisywania zmian!");
             }
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error.message);
         });
 }
 
@@ -46,6 +48,33 @@ function fetchAndDisplayClaimsData() {
             document.getElementById("claims-data-container").innerHTML = data;
         });
 }
+
+function submitRates(buttonElement) {
+    // Tutaj jest miejsce na logikę wysyłania stawek do serwera.
+    // Możesz użyć np. obiektu XMLHttpRequest lub Fetch API, aby to zrobić.
+    const dailyRateInput = document.querySelector("input[name='dailyRate']");
+    const mileageRateInput = document.querySelector("input[name='mileageRate']");
+
+    const dailyRateValue = dailyRateInput.value;
+    const mileageRateValue = mileageRateInput.value;
+
+    // Przykład użycia Fetch API do wysłania danych:
+    fetch('/admin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: 'dailyRate=' + dailyRateValue + '&mileageRate=' + mileageRateValue
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data); // Oczekiwana odpowiedź serwera
+        })
+        .catch(error => {
+            console.error('Błąd podczas wysyłania stawek:', error);
+        });
+}
+
 
 // Uruchom funkcję, gdy strona zostanie wczytana
 window.onload = fetchAndDisplayClaimsData;

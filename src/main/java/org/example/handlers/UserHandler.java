@@ -2,6 +2,7 @@ package org.example.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
+import org.example.config.AppConfig;
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -9,8 +10,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.example.MainApp.dailyAllowanceRate;
-import static org.example.MainApp.mileageRate;
 
 public class UserHandler implements HttpHandler {
 
@@ -55,8 +54,8 @@ public class UserHandler implements HttpHandler {
 
         // ... obliczenia oparte na globalnych stawkach ...
         double reimbursementAmount = 0.0;
-        reimbursementAmount += days * dailyAllowanceRate;
-        reimbursementAmount += distance * mileageRate;
+        reimbursementAmount += days * AppConfig.getDailyAllowanceRate();
+        reimbursementAmount += distance * AppConfig.getMileageRate();
 
         String response = "Total Reimbursement Amount: " + reimbursementAmount + "$";
         httpExchange.sendResponseHeaders(200, response.length());

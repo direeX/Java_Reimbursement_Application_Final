@@ -28,6 +28,18 @@ button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.submitBtn {
+    background-color: #34a853; /* green */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
 button:hover {
     background-color: #288646; /* darker green */
 }

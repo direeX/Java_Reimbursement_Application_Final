@@ -18,7 +18,7 @@ function checkLogin() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-    if(username === "admin" && password === "admin") {
+     if(username === "admin" && password === "admin") {
         window.location.href = "/static/admin.html";
     }
 }
@@ -44,9 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
             formData.append('disable-days', disableDays);
             formData.append('distance', distance);
 
-            console.log("Sending data:", formData.toString()); // TODO
-
-
+            //walidacja w przypadku pustych pól:
+            if (!tripDate || !receiptType || !days || !distance) {
+                alert('Proszę wypełnić wszystkie wymagane pola.');
+                return;
+            }
 
             fetch('/submit', { // Zmieniłem '/user' na '/submit', ponieważ w twoim HTML endpoint to '/submit'
                 method: 'POST',
