@@ -1,5 +1,7 @@
 package org.example.repositories;
 
+import org.example.config.AppConfig;
+
 public class Claim {
     private String tripDate;
     private String receiptType;
@@ -59,6 +61,12 @@ public class Claim {
         this.distance = distance;
     }
 
+    public double getReimbursementAmount() {
+        double total = 0.0;
+        total += this.getDays() * AppConfig.getDailyAllowanceRate();
+        total += this.getDistance() * AppConfig.getMileageRate();
+        return total;
+    }
 
     @Override
     public String toString() {

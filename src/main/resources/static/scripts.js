@@ -34,23 +34,21 @@ document.addEventListener('DOMContentLoaded', function() {
             const tripDate = document.getElementById('trip-date').value;
             const receiptType = document.getElementById('receipts-dropdown').value;
             const days = document.getElementById('days').value;
-            // const disableDays = document.getElementById('disable-days').checked;
             const distance = document.getElementById('distance').value;
 
             const formData = new URLSearchParams();
             formData.append('trip-date', tripDate);
             formData.append('receipt-type', receiptType);
             formData.append('days', days);
-            // formData.append('disable-days', disableDays);
             formData.append('distance', distance);
 
             //walidacja w przypadku pustych pól:
             if (!tripDate || !receiptType || !distance) {
-                alert('Proszę wypełnić wszystkie wymagane pola.');
+                alert('Please complete all required fields.');
                 return;
             }
 
-            fetch('/submit', { // Zakładam, że twoje API akceptuje te dane i odpowiednio je przetwarza
+            fetch('/submit', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -61,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     return response.text();
                 })
                 .then(text => {
-                    // Wyświetl odpowiedź serwera (czyli obliczony zwrot kosztów) na stronie
                     totalAmountSpan.textContent = text.split(": ")[1];
                 })
                 .catch(error => {

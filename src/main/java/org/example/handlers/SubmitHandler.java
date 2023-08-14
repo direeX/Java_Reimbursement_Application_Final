@@ -28,7 +28,6 @@ public class SubmitHandler implements HttpHandler {
             claim.setTripDate(parameters.get("trip-date"));
             claim.setReceiptType(parameters.get("receipt-type"));
             claim.setDays(Integer.parseInt(parameters.getOrDefault("days", "0")));
-//            claim.setDisableDays(Boolean.parseBoolean(parameters.get("disable-days")));
             claim.setDistance(Integer.parseInt(parameters.getOrDefault("distance", "0")));
 
             AppConfig.addClaim(claim);

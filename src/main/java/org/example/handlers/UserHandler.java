@@ -45,14 +45,14 @@ public class UserHandler implements HttpHandler {
         BufferedReader br = new BufferedReader(isr);
         String formData = br.readLine();
 
-        // Rozdziel przesłane dane formularza
+
         Map<String, String> params = parseFormData(formData);
         System.out.println(formData); // test
         double days = Double.parseDouble(params.getOrDefault("days", "0"));
         System.out.println("Days received: " + days);
         double distance = Double.parseDouble(params.getOrDefault("distance", "0"));
 
-        // ... obliczenia oparte na globalnych stawkach ...
+        // obliczenia oparte na globalnych stawkach
         double reimbursementAmount = 0.0;
         reimbursementAmount += days * AppConfig.getDailyAllowanceRate();
         reimbursementAmount += distance * AppConfig.getMileageRate();

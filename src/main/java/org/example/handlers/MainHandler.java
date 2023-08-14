@@ -14,7 +14,7 @@ public class MainHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         String path = exchange.getRequestURI().getPath();
         byte[] response;
-        String contentType = "text/html";  // domyślny typ treści
+        String contentType = "text/html";
 
         if ("/".equals(path)) {
             response = loadResource("static/index.html");

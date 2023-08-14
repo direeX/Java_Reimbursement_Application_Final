@@ -20,20 +20,20 @@ public class AdminHandler implements HttpHandler {
             for (Claim claim : AppConfig.getClaimsList()) {
                 response.append("<details>");
                 response.append("<summary>").append(claim.getTripDate()).append(" - ").append(claim.getReceiptType()).append("</summary>");
-                response.append("Data podróży: <input type='text' name='tripDate' value='").append(claim.getTripDate()).append("'><br>");
-                response.append("Typ paragonu: <input type='text' name='receiptType' value='").append(claim.getReceiptType()).append("'><br>");
-                response.append("Ilość dni: <input type='text' name='days' value='").append(claim.getDays()).append("'><br>");
-//                response.append("Niepełnosprawność: <input type='checkbox' name='isDisabled'").append(claim.isDisableDays() ? " checked" : "").append("><br>");
-                response.append("Dystans: <input type='text' name='distance' value='").append(claim.getDistance()).append("'> km<br>");
-                response.append("<button onclick='submitEdit(this)'>Zapisz zmiany</button>");
+                response.append("Travel date: <input type='text' name='tripDate' value='").append(claim.getTripDate()).append("'><br>");
+                response.append("Receipt type: <input type='text' name='receiptType' value='").append(claim.getReceiptType()).append("'><br>");
+                response.append("Number of days: <input type='text' name='days' value='").append(claim.getDays()).append("'><br>");
+                response.append("Distance: <input type='text' name='distance' value='").append(claim.getDistance()).append("'> km<br>");
+                response.append("<summary>").append(" Reimbursement amount: ").append(claim.getReimbursementAmount()).append("$").append("</summary>");
+                response.append("<button onclick='submitEdit(this)'>Save changes</button>");
                 response.append("</details>");
             }
             response.append("</div>");
 
             response.append("<div class=\"ratesContainer\">");
-            response.append("Stawka za dzień: <input type='text' name='dailyRate' value='").append(AppConfig.getDailyAllowanceRate()).append("'><br>");
-            response.append("Stawka za km: <input type='text' name='mileageRate' value='").append(AppConfig.getMileageRate()).append("'><br>");
-            response.append("<button onclick='submitRates(this)'>Zapisz stawki</button>");
+            response.append("Rate per day: <input type='text' name='dailyRate' value='").append(AppConfig.getDailyAllowanceRate()).append("'><br>");
+            response.append("Rate per mile: <input type='text' name='mileageRate' value='").append(AppConfig.getMileageRate()).append("'><br>");
+            response.append("<button onclick='submitRates(this)'>Save rates</button>");
             response.append("</div>");
 
             byte[] responseBytes = response.toString().getBytes();
