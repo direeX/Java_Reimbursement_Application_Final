@@ -23,16 +23,16 @@ public class AdminHandler implements HttpHandler {
                 response.append("Data podróży: <input type='text' name='tripDate' value='").append(claim.getTripDate()).append("'><br>");
                 response.append("Typ paragonu: <input type='text' name='receiptType' value='").append(claim.getReceiptType()).append("'><br>");
                 response.append("Ilość dni: <input type='text' name='days' value='").append(claim.getDays()).append("'><br>");
-                response.append("Niepełnosprawność: <input type='checkbox' name='isDisabled'").append(claim.isDisableDays() ? " checked" : "").append("><br>");
+//                response.append("Niepełnosprawność: <input type='checkbox' name='isDisabled'").append(claim.isDisableDays() ? " checked" : "").append("><br>");
                 response.append("Dystans: <input type='text' name='distance' value='").append(claim.getDistance()).append("'> km<br>");
                 response.append("<button onclick='submitEdit(this)'>Zapisz zmiany</button>");
                 response.append("</details>");
             }
             response.append("</div>");
 
-            response.append("<div>");
-            response.append("Domyślna stawka za dzień: <input type='text' name='dailyRate' value='").append(AppConfig.getDailyAllowanceRate()).append("'><br>");
-            response.append("Domyślna stawka za km: <input type='text' name='mileageRate' value='").append(AppConfig.getMileageRate()).append("'><br>");
+            response.append("<div class=\"ratesContainer\">");
+            response.append("Stawka za dzień: <input type='text' name='dailyRate' value='").append(AppConfig.getDailyAllowanceRate()).append("'><br>");
+            response.append("Stawka za km: <input type='text' name='mileageRate' value='").append(AppConfig.getMileageRate()).append("'><br>");
             response.append("<button onclick='submitRates(this)'>Zapisz stawki</button>");
             response.append("</div>");
 

@@ -18,7 +18,7 @@ function checkLogin() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
-     if(username === "admin" && password === "admin") {
+    if (username === "admin" && password === "admin") {
         window.location.href = "/static/admin.html";
     }
 }
@@ -28,29 +28,29 @@ document.addEventListener('DOMContentLoaded', function() {
     if (reimbursementForm) {
 
         const totalAmountSpan = document.getElementById('total-amount');
-        reimbursementForm.addEventListener('submit', function (event) {
+        reimbursementForm.addEventListener('submit', function(event) {
             event.preventDefault();
 
             const tripDate = document.getElementById('trip-date').value;
             const receiptType = document.getElementById('receipts-dropdown').value;
             const days = document.getElementById('days').value;
-            const disableDays = document.getElementById('disable-days').checked;
+            // const disableDays = document.getElementById('disable-days').checked;
             const distance = document.getElementById('distance').value;
 
             const formData = new URLSearchParams();
             formData.append('trip-date', tripDate);
             formData.append('receipt-type', receiptType);
             formData.append('days', days);
-            formData.append('disable-days', disableDays);
+            // formData.append('disable-days', disableDays);
             formData.append('distance', distance);
 
             //walidacja w przypadku pustych pól:
-            if (!tripDate || !receiptType || !days || !distance) {
+            if (!tripDate || !receiptType || !distance) {
                 alert('Proszę wypełnić wszystkie wymagane pola.');
                 return;
             }
 
-            fetch('/submit', { // Zmieniłem '/user' na '/submit', ponieważ w twoim HTML endpoint to '/submit'
+            fetch('/submit', { // Zakładam, że twoje API akceptuje te dane i odpowiednio je przetwarza
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -58,7 +58,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: formData.toString()
             })
                 .then(response => {
-                    console.log(response); // Zobacz całą odpowiedź
                     return response.text();
                 })
                 .then(text => {

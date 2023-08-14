@@ -39,6 +39,9 @@ button {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+.ratesContainer{
+padding-top: 100px;
+}
 
 button:hover {
     background-color: #288646; /* darker green */

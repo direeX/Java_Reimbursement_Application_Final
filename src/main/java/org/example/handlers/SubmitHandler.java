@@ -20,9 +20,6 @@ public class SubmitHandler implements HttpHandler {
             InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(), "utf-8");
             BufferedReader br = new BufferedReader(isr);
             String formData = br.readLine();
-
-            // Oto twoje dane formularza, teraz możesz je przetworzyć
-            System.out.println(formData);
             repository.addReceipt(formData);
 
             Map<String, String> parameters = parseFormData(formData);
@@ -31,7 +28,7 @@ public class SubmitHandler implements HttpHandler {
             claim.setTripDate(parameters.get("trip-date"));
             claim.setReceiptType(parameters.get("receipt-type"));
             claim.setDays(Integer.parseInt(parameters.getOrDefault("days", "0")));
-            claim.setDisableDays(Boolean.parseBoolean(parameters.get("disable-days")));
+//            claim.setDisableDays(Boolean.parseBoolean(parameters.get("disable-days")));
             claim.setDistance(Integer.parseInt(parameters.getOrDefault("distance", "0")));
 
             AppConfig.addClaim(claim);
