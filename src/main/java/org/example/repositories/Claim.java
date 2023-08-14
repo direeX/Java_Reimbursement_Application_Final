@@ -59,6 +59,7 @@ public class Claim {
         this.distance = distance;
     }
 
+
     @Override
     public String toString() {
         return "Date of trip: " + tripDate +

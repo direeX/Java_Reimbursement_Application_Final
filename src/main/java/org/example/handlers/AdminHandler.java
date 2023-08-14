@@ -4,8 +4,6 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import org.example.MainApp;
 import org.example.repositories.Claim;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,56 +12,24 @@ public class AdminHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange httpExchange) throws IOException {
         String method = httpExchange.getRequestMethod();
-
-        String path = httpExchange.getRequestURI().getPath();
-
-        System.out.println("Requested path in AdminHandler: " + path); // TODO
-//        if (path.endsWith(".css")) {
-//
-//            byte[] fileBytes = loadResource(path.substring(1));
-//            httpExchange.getResponseHeaders().set("Content-Type", "text/css");
-//            httpExchange.sendResponseHeaders(200, fileBytes.length);
-//            OutputStream os = httpExchange.getResponseBody();
-//            os.write(fileBytes);
-//            os.close();
-//            return;
-//        }
-
-
         if ("GET".equalsIgnoreCase(method)) {
             StringBuilder response = new StringBuilder();
 
-//            response.append("<h1>Submitted Claims</h1>");
-//            response.append("<table border='1'>");
-//            response.append("<thead>");
-//            response.append("<tr>");
-//            response.append("<th>Date of trip</th>");
-//            response.append("<th>Receipt type</th>");
-//            response.append("<th>Days</th>");
-//            response.append("<th>Disable days</th>");
-//            response.append("<th>Distance</th>");
-//            response.append("</tr>");
-//            response.append("</thead>");
-//            response.append("<tbody>");
-
+            response.append("<div>");
             for (Claim claim : MainApp.claimsList) {
-//                response.append("<tr>");
-//                response.append("<td>").append(claim.getTripDate()).append("</td>");
-//                response.append("<td>").append(claim.getReceiptType()).append("</td>");
-//                response.append("<td>").append(claim.getDays()).append("</td>");
-//                response.append("<td>").append(claim.isDisableDays()).append("</td>");
-//                response.append("<td>").append(claim.getDistance()).append("</td>");
-//                response.append("</tr>");
-
-                response.append(claim.getTripDate()).append(", ");
-                response.append(claim.getReceiptType()).append(", ");
-                response.append(claim.getDays()).append(", ");
-                response.append(claim.isDisableDays()).append(", ");
-                response.append(claim.getDistance()).append("\n");
 
 
+                response.append("<details>");
+                response.append("<summary>").append(claim.getTripDate()).append(" - ").append(claim.getReceiptType()).append("</summary>");
+                response.append("Data podróży: <input type='text' value='").append(claim.getTripDate()).append("'><br>");
+                response.append("Typ paragonu: <input type='text' value='").append(claim.getReceiptType()).append("'><br>");
+                response.append("Ilość dni: <input type='text' value='").append(claim.getDays()).append("'><br>");
+                response.append("Niepełnosprawność: <input type='checkbox'").append(claim.isDisableDays() ? " checked" : "").append("><br>");
+                response.append("Dystans: <input type='text' value='").append(claim.getDistance()).append("'> km<br>");
+                response.append("<button onclick='submitEdit()'>Zapisz zmiany</button>");  // Przycisk do zapisywania zmian
+                response.append("</details>");
             }
-
+            response.append("</div>");
 
             byte[] responseBytes = response.toString().getBytes();
 
@@ -88,12 +54,5 @@ public class AdminHandler implements HttpHandler {
                 os.close();
             }
         }
-    }
-    private byte[] loadResource(String resourceName) throws IOException {
-        InputStream is = getClass().getClassLoader().getResourceAsStream(resourceName);
-        if (is == null) {
-            throw new FileNotFoundException("File " + resourceName + " was not found.");
-        }
-        return is.readAllBytes();
     }
 }

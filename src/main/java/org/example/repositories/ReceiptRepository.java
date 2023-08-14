@@ -1,10 +1,7 @@
 package org.example.repositories;
 
 
-import org.example.models.Receipt;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ReceiptRepository {

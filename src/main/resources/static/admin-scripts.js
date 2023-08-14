@@ -2,36 +2,88 @@ function backToHome() {
     window.location.href = "/";
 }
 
-function viewClaims() {
-    window.location.href = "/admin/claims"
+function submitEdit() {
+    // Tu zbieramy dane z edytowanego wniosku. Na razie zakładam, że masz tylko jeden wniosek na stronie.
+    // Jeśli masz ich więcej, trzeba będzie nieco zmodyfikować ten kod.
+
+    let tripDate = document.querySelector("input[type='text'][name='tripDate']").value;
+    let receiptType = document.querySelector("input[type='text'][name='receiptType']").value;
+    let days = document.querySelector("input[type='text'][name='days']").value;
+    let isDisabled = document.querySelector("input[type='checkbox'][name='isDisabled']").checked;
+    let distance = document.querySelector("input[type='text'][name='distance']").value;
+
+    // Tworzymy obiekt z danymi
+    let data = {
+        tripDate: tripDate,
+        receiptType: receiptType,
+        days: days,
+        isDisabled: isDisabled,
+        distance: distance
+    };
+
+    // Wysyłamy dane na serwer
+    fetch("/admin/edit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert("Zmiany zostały zapisane!");
+            } else {
+                alert("Wystąpił błąd podczas zapisywania zmian!");
+            }
+        });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+function fetchAndDisplayClaimsData() {
+    fetch("/admin/claims-data")
+        .then(response => response.text()) // Lub `response.json()`, jeśli zdecydowałeś się zwrócić dane jako JSON.
+        .then(data => {
+            document.getElementById("claims-data-container").innerHTML = data;
+        });
+}
+
+// Uruchom funkcję, gdy strona zostanie wczytana
+window.onload = fetchAndDisplayClaimsData;
 
 
-    function loadClaims() {
-        fetch('/admin/claims')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                const claimsContainer = document.getElementById('claims-container');                if (!claimsContainer) {
-                    console.error("claimsContainer not found!");
-                    return;
-                }
-                claimsContainer.textContent = data;
-            })
-            .catch(error => {
-                console.log('There was a problem with the fetch operation:', error.message);
-            });
-    }
 
-    // Załaduj formularze po załadowaniu strony
-    loadClaims();
-});
+// function viewClaims() {
+//     window.location.href = "/admin/claims"
+// }
+
+// document.addEventListener('DOMContentLoaded', function() {
+//
+//     // Funkcja do wyświetlenia listy wniosków na stronie:
+//     function loadClaims() {
+//         fetch('/admin/claims')
+//             .then(response => {
+//                 if (!response.ok) {
+//                     throw new Error('Network response was not ok');
+//                 }
+//                 return response.text();
+//             })
+//             .then(data => {
+//                 const claimsContainer = document.getElementById('claims-container');                if (!claimsContainer) {
+//                     console.error("claimsContainer not found!");
+//                     return;
+//                 }
+//                 claimsContainer.textContent = data;
+//             })
+//             .catch(error => {
+//                 console.log('There was a problem with the fetch operation:', error.message);
+//             });
+//     }
+//
+//     // Załaduj formularze po załadowaniu strony
+//     loadClaims();
+//     submitEdit();
+// });
+
 
 
 // document.addEventListener('DOMContentLoaded', function() {
