@@ -64,7 +64,7 @@ public class UserHandler implements HttpHandler {
         os.close();
     }
 
-    private Map<String, String> parseFormData(String formData) {
+    public Map<String, String> parseFormData(String formData) {
         Map<String, String> parameters = new HashMap<>();
         if (formData == null || formData.trim().isEmpty()) {
             return parameters;

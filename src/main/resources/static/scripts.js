@@ -6,10 +6,6 @@ function goToAdmin() {
     window.location.href = "/static/login.html";
 }
 
-function changeBackground() {
-    document.body.style.backgroundColor = "#34a853"; // green
-}
-
 function backToHome() {
     window.location.href = "/";
 }

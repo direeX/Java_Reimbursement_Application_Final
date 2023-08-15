@@ -1,10 +1,11 @@
 body {
     background-color: #e4fcef; /* light green */
-    font-family: Arial, sans-serif;
+    font-family: 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
     font-size: 16px;
     line-height: 1.5;
+
 }
 
 footer {
@@ -50,11 +51,13 @@ button:hover {
 #backToHomeBtn {
     margin-top: 20px;
     display: block;
+    background: linear-gradient(45deg, #34a853, #288646);
 }
 
 .homeBtn {
     padding: 60px;
     font-size: 32px;
+    background: linear-gradient(45deg, #34a853, #288646);
 }
 
 .main-container{
@@ -106,4 +109,38 @@ input, select {
 .receipt {
     padding: 10px;
     border-bottom: 1px solid #eee;
+}
+
+button, .main-container, .main-container-index2, .main-container-index {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s forwards 0.3s;
+}
+
+button, .submitBtn, .homeBtn {
+    background: linear-gradient(45deg, #34a853, #288646);
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 50px;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 650px) {
+    .homeBtn {
+        padding: 30px;
+        font-size: 24px;
+    }
+
+    .main-container, .main-container-index2, .main-container-index {
+        max-width: 90%;
+    }
 }
