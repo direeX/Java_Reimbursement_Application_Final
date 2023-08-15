@@ -121,10 +121,49 @@ button, .submitBtn, .homeBtn {
     background: linear-gradient(45deg, #34a853, #288646);
 }
 
-footer {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 50px;
+.footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid #e7e7e7;
+    padding: 20px 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.footer p {
+    margin: 0;
+    color: #777;
+}
+
+.footer-links {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.footer-links li {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #007bff;
+}
+
+.main-container-index2 h2 {
+    font-weight: 600;
+    color: #444;
+    padding: 15px 30px;
+    background-color: rgba(255, 255, 255, 0.8); /* Delikatne tło */
+    border-radius: 10px; /* Zaokrąglone rogi */
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2); /* Subtelny cień */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Cień tekstu */
 }
 
 @keyframes fadeInUp {
